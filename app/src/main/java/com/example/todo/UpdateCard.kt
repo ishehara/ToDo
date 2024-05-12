@@ -4,9 +4,10 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
 import android.widget.Toast
 import androidx.room.Room
-import kotlinx.android.synthetic.main.activity_update_card.*
+
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
@@ -20,36 +21,36 @@ class UpdateCard : AppCompatActivity() {
         ).build()
         val pos = intent.getIntExtra("id", -1)
         if (pos != -1) {
-            val title = DataObject.getData(pos).title
-            val priority = DataObject.getData(pos).priority
-            create_title.setText(title)
-            create_priority.setText(priority)
+            val task = DataObject.getData(pos).task
 
-            delete_button.setOnClickListener {
+            findViewById<Button>(R.id.create_task).setText(task)
+
+
+            findViewById<Button>(R.id.delete_button).setOnClickListener {
                 DataObject.deleteData(pos)
                 GlobalScope.launch {
                     database.dao().deleteTask(
                         Entity(
                             pos + 1,
-                            create_title.text.toString(),
-                            create_priority.text.toString()
+                            findViewById<Button>(R.id.create_task).text.toString(),
+
                         )
                     )
                 }
                 myIntent()
             }
 
-            update_button.setOnClickListener {
+            findViewById<Button>(R.id.update_button).setOnClickListener {
                 DataObject.updateData(
                     pos,
-                    create_title.text.toString(),
-                    create_priority.text.toString()
+                    findViewById<Button>(R.id.create_task).text.toString(),
+
                 )
                 GlobalScope.launch {
                     database.dao().updateTask(
                         Entity(
-                            pos + 1, create_title.text.toString(),
-                            create_priority.text.toString()
+                            pos + 1, findViewById<Button>(R.id.create_task).text.toString(),
+
                         )
                     )
                 }
