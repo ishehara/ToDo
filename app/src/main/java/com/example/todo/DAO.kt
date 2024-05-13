@@ -1,7 +1,7 @@
 package com.example.todo
 
 import androidx.room.*
-
+//quries
 @Dao
 interface DAO {
     @Insert
@@ -13,7 +13,7 @@ interface DAO {
     @Delete
     suspend fun deleteTask(entity: Entity)
 
-    @Query("Delete from to_do")
+    @Query("Delete from To_Do")
     suspend fun deleteAll()
 
     @Query("Select * from to_do")

@@ -13,12 +13,18 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 
+// entity - table
+// dao - queries
+// database
 
 class MainActivity : AppCompatActivity() {
+
     private lateinit var database: myDatabase
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
         database = Room.databaseBuilder(
             applicationContext, myDatabase::class.java, "To_Do"
         ).build()
@@ -29,9 +35,11 @@ class MainActivity : AppCompatActivity() {
         }
         findViewById<Button>(R.id.deleteAll).setOnClickListener {
             DataObject.deleteAll()
+
             GlobalScope.launch {
                 database.dao().deleteAll()
             }
+
             setRecycler()
         }
 
@@ -40,8 +48,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun setRecycler() {
-        val recyclerView = findViewById<RecyclerView>(R.id.recycler_view)
-        recyclerView.adapter = Adapter(DataObject.getAllData())
-        recyclerView.layoutManager = LinearLayoutManager(this)
+        val recycler_view = findViewById<RecyclerView>(R.id.recycler_view)
+        recycler_view.adapter = Adapter(DataObject.getAllData())
+        recycler_view.layoutManager = LinearLayoutManager(this)
     }
 }

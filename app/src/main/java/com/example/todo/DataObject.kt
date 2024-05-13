@@ -1,6 +1,5 @@
 package com.example.todo
 
-
 object DataObject {
     var listdata = mutableListOf<CardInfo>()
 
@@ -24,10 +23,9 @@ object DataObject {
         listdata.removeAt(pos)
     }
 
-    fun updateData(pos:Int,task:String)
+    fun updateData(pos:Int,task: String)
     {
-        listdata[pos].task= task
+        listdata[pos].task=task
 
     }
-
 }

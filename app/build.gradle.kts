@@ -1,9 +1,9 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
-
-
-
+    //    kotlin("kapt")
+    id("kotlin-android")
+    id("kotlin-kapt")
 
 
 }
@@ -47,17 +47,22 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
-
-
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
 
+    // room
+    val room_version = "2.6.1"
+    implementation("androidx.room:room-runtime:$room_version")
+    annotationProcessor ("androidx.room:room-compiler:$room_version")
+    kapt("androidx.room:room-compiler:$room_version")
+    implementation("androidx.room:room-ktx:$room_version")
+
+
+
+
+
     implementation("androidx.recyclerview:recyclerview:1.3.2")
-    implementation("androidx.room:room-runtime:2.5.0")
-
-    implementation ("androidx.room:room-ktx:2.5.0")
-
 
 }
